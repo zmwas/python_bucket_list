@@ -1,0 +1,50 @@
+/*
+Bucket list Sass Theme
+Author: Zacharia Mwangi
+Version 1.0.0
+*/
+/*BASE - Base styles, variables, mixins */
+/*MODULES - Individual site components */
+/*LAYOUTS - Layout style for the page */
+.footer {
+  color: #ffffff; }
+
+.navbar {
+  padding-bottom: 10px;
+  top: 0;
+  width: 100%; }
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+  .navbar li {
+    float: left; }
+  .navbar a {
+    text-decoration: none;
+    color: #0f0f0f; }
+  .navbar form {
+    float: right;
+    position: absolute;
+    right: 10px;
+    padding-right: 10px;
+    padding-top: 30px; }
+
+.main {
+  padding: 10px; }
+  .main .main-page-item {
+    display: inline-block;
+    margin-left: 10px; }
+  .main .signup-container {
+    width: 40%;
+    float: right; }
+    .main .signup-container input {
+      display: block;
+      margin-top: .75em;
+      margin-bottom: .75em; }
+    .main .signup-container .text {
+      width: 100%; }
+  .main .carousel-container {
+    width: 60%; }
+
+/*# sourceMappingURL=main.css.map */
