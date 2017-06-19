@@ -5,9 +5,41 @@ Version 1.0.0
 */
 /*BASE - Base styles, variables, mixins */
 /*MODULES - Individual site components */
+h1 {
+  text-align: center; }
+
+.bucket-lists li {
+  padding: 50px; }
+.bucket-lists .item-name {
+  padding-right: 20%; }
+.bucket-lists .item-image {
+  padding-right: 20%; }
+
+.bucket-lists li {
+  padding: 50px; }
+.bucket-lists .item-name {
+  padding-right: 20%; }
+.bucket-lists .item-image {
+  padding-right: 20%; }
+
 /*LAYOUTS - Layout style for the page */
 .footer {
   color: #ffffff; }
+
+.header {
+  padding: 10px;
+  top: 0; }
+  .header a {
+    text-decoration: none;
+    color: #0f0f0f; }
+  .header ul {
+    list-style: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px; }
+  .header li {
+    float: left;
+    padding: 10px; }
 
 .navbar {
   padding-bottom: 10px;
@@ -38,11 +70,7 @@ Version 1.0.0
     width: 40%;
     float: right; }
     .main .signup-container input {
-      display: block;
-      margin-top: .75em;
-      margin-bottom: .75em; }
-    .main .signup-container .text {
-      width: 100%; }
+      display: block; }
   .main .carousel-container {
     width: 60%; }
 
