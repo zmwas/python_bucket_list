@@ -33,8 +33,7 @@ Version 1.0.0
 .main {
   padding: 10px; }
   .main .main-page-item {
-    display: inline-block;
-    margin-left: 10px; }
+    display: inline-block; }
   .main .signup-container {
     width: 40%;
     float: right; }
