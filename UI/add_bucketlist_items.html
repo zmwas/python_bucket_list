@@ -10,12 +10,12 @@
 <body>
 <div class="header">
     <ul>
-        <li><a href="#"><h1>Bucketlist</h1></a></li>
+        <li><a href="#"><span class="brand">Bucketlist</span></a></li>
         <li><img src="images/create.png"/> Add list item</li>
         <li><img src="images/logout.png"/> Logout</li>
 
     </ul>
-
+<hr/>
 </div>
 
 <div class="title">
@@ -25,16 +25,40 @@
 
 <div class="bucket-lists">
     <ol>
-        <li><span class="item-name">List item one</span> <img src="images/delete.png" class="item-image"/><img src="images/edit.png"
-                                                                                                               class="item-image"/> <img src="images/completed.png" class="item-image"/>
+        <li><span class="item-name">List item one</span>
+            <button class="image-button"><img src="images/delete.png"/>
+            </button>
+            <button><img src="images/edit.png" class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
         </li>
-        <li><span class="item-name">List item two</span> <img src="images/delete.png" class="item-image"/><img src="images/edit.png"
-                                                                                                               class="item-image"/> <img
-                src="images/inprogress.png" class="item-image" />
+
+        <li><span class="item-name">List item two</span>
+            <button class="image-button"><img src="images/delete.png"/></button>
+            <button><img src="images/edit.png"
+                         class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
         </li>
-        <li><span class="item-name">List item three</span> <img src="images/delete.png" class="item-image"/><img src="images/edit.png"
-                                                                                                                 class="item-image"/> <img src="images/on_ice.png "class="item-image"/>
         </li>
+
+
+        <li><span class="item-name">List item three</span>
+            <button class="image-button"><img src="images/delete.png"/></button>
+            <button><img src="images/edit.png"
+                         class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
+        </li>        </li>
 
 
     </ol>
