@@ -1,0 +1,91 @@
+/*
+Bucket list Sass Theme
+Author: Zacharia Mwangi
+Version 1.0.0
+*/
+/*BASE - Base styles, variables, mixins */
+/*MODULES - Individual site components */
+button {
+  margin-right: 10%; }
+
+h1 {
+  text-align: center; }
+
+.brand {
+  font-size: 30px;
+  padding-right: 900px; }
+
+option .completed {
+  background-image: url("/images/completed.png"); }
+option .progress {
+  background-image: url("/images/inprogress.png"); }
+option .ice {
+  background-image: url("/images/on_ice.png"); }
+
+.bucket-lists li {
+  padding: 50px; }
+.bucket-lists .item-name {
+  padding-right: 20%; }
+
+.bucket-lists li {
+  padding: 50px;
+  border: solid;
+  margin-bottom: 10px; }
+.bucket-lists .item-name {
+  padding-right: 20%; }
+.bucket-lists .item-image {
+  padding-right: 20%; }
+
+/*LAYOUTS - Layout style for the page */
+.footer {
+  color: #ffffff; }
+
+.header {
+  padding: 10px;
+  top: 0; }
+  .header a {
+    text-decoration: none;
+    color: #0f0f0f; }
+  .header ul {
+    list-style: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px; }
+  .header li {
+    float: left;
+    padding: 10px; }
+
+.navbar {
+  padding-bottom: 10px;
+  top: 0;
+  width: 100%; }
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+  .navbar li {
+    float: left; }
+  .navbar a {
+    text-decoration: none;
+    color: #0f0f0f; }
+  .navbar form {
+    float: right;
+    position: absolute;
+    right: 10px;
+    padding-right: 10px;
+    padding-top: 30px; }
+
+.main {
+  padding: 10px; }
+  .main .main-page-item {
+    display: inline-block; }
+  .main .signup-container {
+    width: 40%;
+    float: right; }
+    .main .signup-container input {
+      display: block; }
+  .main .carousel-container {
+    width: 60%; }
+
+/*# sourceMappingURL=main.css.map */
