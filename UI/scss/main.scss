@@ -1,0 +1,26 @@
+/*
+Bucket list Sass Theme
+Author: Zacharia Mwangi
+Version 1.0.0
+*/
+
+/*BASE - Base styles, variables, mixins */
+@import "base/base";
+@import "base/mixins";
+@import "base/normalize";
+@import "base/variables";
+
+
+
+/*MODULES - Individual site components */
+@import "modules/buttons";
+@import "modules/components";
+@import "modules/lists";
+@import "modules/typography";
+
+
+/*LAYOUTS - Layout style for the page */
+@import "layouts/footer";
+@import "layouts/header";
+@import "layouts/nav";
+@import "layouts/homepage";
