@@ -5,18 +5,32 @@ Version 1.0.0
 */
 /*BASE - Base styles, variables, mixins */
 /*MODULES - Individual site components */
+button {
+  margin-right: 10%; }
+
 h1 {
   text-align: center; }
+
+.brand {
+  font-size: 30px;
+  padding-right: 900px; }
+
+option .completed {
+  background-image: url("/images/completed.png"); }
+option .progress {
+  background-image: url("/images/inprogress.png"); }
+option .ice {
+  background-image: url("/images/on_ice.png"); }
 
 .bucket-lists li {
   padding: 50px; }
 .bucket-lists .item-name {
   padding-right: 20%; }
-.bucket-lists .item-image {
-  padding-right: 20%; }
 
 .bucket-lists li {
-  padding: 50px; }
+  padding: 50px;
+  border: solid;
+  margin-bottom: 10px; }
 .bucket-lists .item-name {
   padding-right: 20%; }
 .bucket-lists .item-image {
