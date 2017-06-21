@@ -1,29 +1,32 @@
+"""Tests for user methods.
+
+"""
+
 import unittest
 
 from accounts.bucket_user import BucketUser
 
 
 class UserTestCase(unittest.TestCase):
-    """TestCase for user methods
-
+    """TestCase for user methods.
     """
 
     def setUp(self):
         self.bucket_user = BucketUser('Zacharia Mwangi', 'zacmwanginj@gmail.com')
 
-    def test_create_user_returns_user_object(self):
+    def test_create_user_returns_user(self):
         """
-        Tests that the create_user method returns a user
+        Tests that the create_user method returns a user.
 
         """
 
         user = BucketUser("", "")
-        self.assertIsInstance(user.create_user('Zacharia Mwangi', 'zacmwanginj@gmail.com'), BucketUser,
-                              msg="create user method should return a user object")
+        zac = user.create_user('Zacharia Mwangi', 'zacmwanginj@gmail.com')
+        self.assertIsInstance(zac, BucketUser, msg="create user method should return a user object")
 
     def test_create_user_requires_email(self):
         """
-        Tests that create_user method checks for email
+        Tests that create_user method checks for email.
 
         """
 
@@ -33,7 +36,7 @@ class UserTestCase(unittest.TestCase):
 
     def test_create_user_requires_name(self):
         """
-        Tests that create_user method checks for name
+        Tests that create_user method checks for name.
 
         """
         user = BucketUser("", "")
@@ -42,8 +45,8 @@ class UserTestCase(unittest.TestCase):
 
     def test_password_is_set(self):
         """
-        Tests that set_password sets the password
-        :return:
+        Tests that set_password sets the password.
+
         """
         user = self.bucket_user.set_password("password")
         self.assertTrue(user)
