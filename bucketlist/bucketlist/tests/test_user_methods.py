@@ -40,6 +40,14 @@ class UserTestCase(unittest.TestCase):
         self.assertEqual(user.create_user('', 'zacmwanginj@gmail.com'), 'Please provide your name',
                          msg="name should be provided to create user")
 
+    def test_password_is_set(self):
+        """
+        Tests that set_password sets the password
+        :return:
+        """
+        user = self.bucket_user.set_password("password")
+        self.assertTrue(user)
+
 
 if __name__ == '__main__':
     unittest.main()
