@@ -18,7 +18,7 @@ class BucketList(object):
     """
 
     def __init__(self, list_id, name=None, completion_status=None):
-        self.id = list_id
+        self.list_id = list_id
         self.name = name
         self.completion_status = completion_status
 
@@ -35,5 +35,5 @@ class BucketList(object):
             return "Please provide a name for your bucket list"
 
         self.name = name
-        self.completion_status
+        self.completion_status = completion_status
         return self
