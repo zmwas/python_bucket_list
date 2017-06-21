@@ -1,5 +1,5 @@
 """
-This module tests user controller and bucket controller methods
+This module tests user controller  controller methods
 
 """
 
