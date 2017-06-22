@@ -4,10 +4,11 @@ This module tests bucket controller methods
 """
 
 import unittest
+
 from bucket_controller import BucketController
-from user_controller import UserAuth
-from buckets.buckets import BucketList
+
 from buckets.bucket_items import BucketListItems
+from controllers.user_controller import UserAuth
 
 
 class BucketListTestCase(unittest.TestCase):
@@ -20,11 +21,7 @@ class BucketListTestCase(unittest.TestCase):
         self.auth = UserAuth()
 
 
-    def test_create_bucket_directory(self):
-        self.auth.add_user("Zack", "zacmwanginj@gmail.com", "password")
-        lists = len(self.buck.create_bucket_directory())
-        users = len(self.auth.list_of_users)
-        self.assertEqual(lists, users)
+
 
     def test_create_bucket_list(self):
         self.auth.add_user("Zack", "johndoe@gmail.com", "password")
@@ -33,7 +30,8 @@ class BucketListTestCase(unittest.TestCase):
         # The initial length of the list of bucket lists
         initial = len(self.buck.bucket_list_dictionaries.get(user.email))
         #create a bucket list
-        self.buck.create_bucket_list(user.email, "name", "status")
+        self.buck.create_bucket_list(user.email, "2017", "status")
+        print(self.buck.create_bucket_list(user.email, "2017", "status"))
         # The new length of the list after bucket list is created
         new = len(self.buck.bucket_list_dictionaries.get(user.email))
 
