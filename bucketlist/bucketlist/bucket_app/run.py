@@ -34,6 +34,24 @@ def register():
     return render_template('registration.html', form=form)
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if auth.current_user.is_logged_in:
+        return redirect('/bucket')
+
+    form = LoginForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+
+        response = auth.login(email, password)
+        print(response)
+        if response == 'Welcome':
+            print(auth.current_user)
+            return redirect('/bucket')
+
+    return render_template('login.html', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
