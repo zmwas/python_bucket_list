@@ -3,7 +3,7 @@
 """
 
 
-class BucketList(object):
+class BucketList(list):
     """Class for the buckets
 
     Args
@@ -17,8 +17,7 @@ class BucketList(object):
 
     """
 
-    def __init__(self, list_id, name=None, completion_status=None):
-        self.list_id = list_id
+    def __init__(self, name=None, completion_status=None):
         self.name = name
         self.completion_status = completion_status
 
@@ -36,4 +35,5 @@ class BucketList(object):
 
         self.name = name
         self.completion_status = completion_status
+
         return self
