@@ -24,6 +24,11 @@ class BucketListTestCase(unittest.TestCase):
 
 
     def test_create_bucket_list(self):
+        """
+        Tests that a bucket list is created
+        """
+
+
         self.auth.add_user("Zack", "johndoe@gmail.com", "password")
 
         user = self.auth.list_of_users[0]
@@ -40,8 +45,13 @@ class BucketListTestCase(unittest.TestCase):
 
 
     def test_add_bucket_item(self):
+        """
+        Tests that a bucket item is created
+
+        """
+
+
         self.auth.add_user("Zack", "johndoe@gmail.com", "password")
-        self.buck.create_bucket_directory()
         bucket = self.buck.create_bucket_list("johndoe@gmail.com", "new", "status")
 
         print(bucket)
@@ -51,6 +61,8 @@ class BucketListTestCase(unittest.TestCase):
         created = self.buck.add_bucket_item("johndoe@gmail.com","new",bucket_item.name,bucket_item.completion_status)
         print(created)
         self.assertEqual(len(created),3)
+
+
 
 if __name__ == '__main__':
     unittest.main()
