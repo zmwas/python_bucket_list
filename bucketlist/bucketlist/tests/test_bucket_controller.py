@@ -52,7 +52,7 @@ class BucketListTestCase(unittest.TestCase):
         bucket_item.create_bucket_items("Make something")
         created = self.buck.add_bucket_item("johndoe@gmail.com","new",bucket_item.name,bucket_item.completion_status)
         print(created)
-        self.assertEqual(len(bucket),1)
+        self.assertEqual(len(created),3)
 
 if __name__ == '__main__':
     unittest.main()
