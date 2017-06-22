@@ -16,3 +16,7 @@ class LoginForm(FlaskForm):
 
 class CreateBucketListForm(FlaskForm):
     bucket_name = StringField('bucket_name')
+
+
+class CreateBucketItemForm(FlaskForm):
+    bucket_item_name = StringField('bucket_item_name')
