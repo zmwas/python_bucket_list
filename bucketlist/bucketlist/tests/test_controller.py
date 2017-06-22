@@ -7,7 +7,6 @@ import unittest
 from user_controller import UserAuth
 
 
-from bucket_controller import BucketController
 
 
 class TestController(unittest.TestCase):
@@ -17,7 +16,6 @@ class TestController(unittest.TestCase):
 
     def setUp(self):
         self.auth = UserAuth()
-        self.buck = BucketController()
 
     def test_user_registration(self):
         """
