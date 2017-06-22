@@ -14,3 +14,15 @@ class BucketController():
             self.bucket_list_dictionaries.setdefault(user.email, [])
 
         return self.bucket_list_dictionaries
+
+    def create_bucket_list(self,email ,name, completion_status):
+        bucketlist = BucketList()
+        bucketlist.create_bucket_list(name, completion_status)
+        buckets= self.bucket_list_dictionaries.get(email)
+        buckets.append(bucketlist)
+        return buckets
+
+
+
+
+
