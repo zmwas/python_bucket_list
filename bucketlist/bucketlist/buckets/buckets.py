@@ -7,7 +7,6 @@ class BucketList(list):
     """Class for the buckets
 
     Args
-        list_id(int):Auto incrementing bucket list id
         name (str): Name of the bucket list
         completion_status(str): How far one has gotten in the bucket list
 
@@ -35,5 +34,6 @@ class BucketList(list):
 
         self.name = name
         self.completion_status = completion_status
-
+        self.append(name)
+        self.append(completion_status)
         return self
