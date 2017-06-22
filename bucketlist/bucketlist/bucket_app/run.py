@@ -65,7 +65,14 @@ def create_bucket_list():
 
     return render_template('create_list.html', form=form)
 
-    return render_template('view_bucket_items.html', single_bucket=single_bucket)
+
+@app.route('/main', methods=['GET'])
+def view_bucket_lists():
+    buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
+
+    return render_template('view_buckets.html', buckets=buckets)
+
+
 
 
 if __name__ == '__main__':
