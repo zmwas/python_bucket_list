@@ -73,6 +73,13 @@ def view_bucket_lists():
     return render_template('view_buckets.html', buckets=buckets)
 
 
+@app.route('/<id>', methods=['GET'])
+def view_bucket_items(id):
+    val = id
+    buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
+    single_bucket = buckets[int(val)-1]
+
+    return render_template('view_bucket_items.html', single_bucket=single_bucket)
 
 
 if __name__ == '__main__':
