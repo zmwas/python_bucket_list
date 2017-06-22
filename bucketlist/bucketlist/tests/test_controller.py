@@ -4,9 +4,8 @@ This module tests user controller  controller methods
 """
 
 import unittest
-from user_controller import UserAuth
 
-
+from controllers.user_controller import UserAuth
 
 
 class TestController(unittest.TestCase):
