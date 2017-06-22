@@ -14,4 +14,5 @@ class LoginForm(FlaskForm):
     password = PasswordField('password')
 
 
-
+class CreateBucketListForm(FlaskForm):
+    bucket_name = StringField('bucket_name')
