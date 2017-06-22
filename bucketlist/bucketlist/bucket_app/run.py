@@ -53,5 +53,20 @@ def login():
     return render_template('login.html', form=form)
 
 
+@app.route('/bucket', methods=['GET', 'POST'])
+def create_bucket_list():
+    form = CreateBucketListForm(csrf_enabled=False)
+
+    if form.validate_on_submit():
+        name = form.bucket_name.data
+        b = bucket.create_bucket(auth.current_user.email, name, completion_status="On Ice")
+
+        return redirect('/main')
+
+    return render_template('create_list.html', form=form)
+
+    return render_template('view_bucket_items.html', single_bucket=single_bucket)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
