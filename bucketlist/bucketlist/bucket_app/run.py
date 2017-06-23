@@ -2,8 +2,8 @@ from controllers.user_controller import UserAuth
 from flask import (Flask, render_template,
                    redirect)
 from bucket_app.forms import (RegistrationForm,
-                   LoginForm, CreateBucketListForm,
-                   CreateBucketItemForm)
+                              LoginForm, CreateBucketListForm,
+                              CreateBucketItemForm)
 
 from controllers.bucket_controller import BucketController
 
@@ -15,6 +15,10 @@ val = 0
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """
+    View that renders the index page
+    """
+
     if auth.current_user.is_logged_in:
         return redirect('/main')
 
@@ -45,6 +49,9 @@ def index():
 
 @app.route('/bucket', methods=['GET', 'POST'])
 def create_bucket_list():
+    """
+    View that renders the bucket list  creation form
+    """
     if not auth.current_user.is_logged_in:
         return redirect('/')
 
@@ -62,6 +69,10 @@ def create_bucket_list():
 
 @app.route('/main', methods=['GET'])
 def view_bucket_lists():
+    """
+    View that renders the bucket lists
+    """
+
     if not auth.current_user.is_logged_in:
         return redirect('/')
     form = CreateBucketListForm(csrf_enabled=False)
@@ -79,6 +90,9 @@ def view_bucket_lists():
 
 @app.route('/<int:id>', methods=['GET'])
 def view_bucket_items(id):
+    """
+    View that renders the bucket items page
+    """
     if not auth.current_user.is_logged_in:
         return redirect('/')
     val = id
@@ -108,6 +122,9 @@ def create_bucket_items():
 
 @app.route('/remove/<id>')
 def delete_bucket(id):
+    """
+    View that renders the deletes bucket lists
+    """
     if not auth.current_user.is_logged_in:
         return redirect('/')
     val = int(id) - 1
