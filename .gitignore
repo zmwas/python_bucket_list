@@ -1,0 +1,5 @@
+UI/.sass-cache/*
+UI/.idea/*
+bucketlist/bucketlist/.idea/*
+bucketlist/bucketlist/tests/__pycache__/*
+bucketlist/bucketlist/tests/.cache/*
