@@ -30,3 +30,8 @@ class TestBucket(unittest.TestCase):
         bucket = BucketList("", "")
         bucket = bucket.create_bucket_list("")
         self.assertEqual(bucket, "Please provide a name for your bucket list", )
+
+
+if __name__ == '__main__':
+    unittest.main()
+

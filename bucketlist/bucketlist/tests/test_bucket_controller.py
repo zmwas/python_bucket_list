@@ -5,9 +5,9 @@ This module tests bucket controller methods
 
 import unittest
 
-from bucket_controller import BucketController
-
 from buckets.bucket_items import BucketListItems
+from buckets.buckets import BucketList
+from controllers.bucket_controller import BucketController
 from controllers.user_controller import UserAuth
 
 
@@ -20,48 +20,60 @@ class BucketListTestCase(unittest.TestCase):
         self.buck = BucketController()
         self.auth = UserAuth()
 
-
-
-
-    def test_create_bucket_list(self):
-        """
-        Tests that a bucket list is created
-        """
-
-
-        self.auth.add_user("Zack", "johndoe@gmail.com", "password")
-
-        user = self.auth.list_of_users[0]
-        # The initial length of the list of bucket lists
-        initial = len(self.buck.bucket_list_dictionaries.get(user.email))
-        #create a bucket list
-        self.buck.create_bucket_list(user.email, "2017", "status")
-        print(self.buck.create_bucket_list(user.email, "2017", "status"))
-        # The new length of the list after bucket list is created
-        new = len(self.buck.bucket_list_dictionaries.get(user.email))
-
-        self.assertEqual(initial + 1, new)
-
-
-
     def test_add_bucket_item(self):
         """
         Tests that a bucket item is created
 
         """
 
-
         self.auth.add_user("Zack", "johndoe@gmail.com", "password")
-        bucket = self.buck.create_bucket_list("johndoe@gmail.com", "new", "status")
+        list_of_buckets = self.buck.bucket_list_dictionaries.get("johndoe@gmail.com")
+        bucket = BucketList()
+        bucket.create_bucket_list("name", "status")
+        list_of_buckets.append(bucket)
 
-        print(bucket)
-        bucket_item = BucketListItems()
+        bucket_item = BucketListItems("Make something")
 
-        bucket_item.create_bucket_items("Make something")
-        created = self.buck.add_bucket_item("johndoe@gmail.com","new",bucket_item.name,bucket_item.completion_status)
-        print(created)
-        self.assertEqual(len(created),3)
+        created = self.buck.add_bucket_item("johndoe@gmail.com", 0, bucket_item.name, bucket_item.completion_status)
+        self.assertEqual(len(created), 3)
 
+    def test_create_bucket(self):
+        """
+        Tests that a bucket is create
+
+        """
+        self.auth.add_user("Zack", "zackdoe@gmail.com", "password")
+        list_of_buckets = self.buck.bucket_list_dictionaries.get("zackdoe@gmail.com")
+        initial = len(list_of_buckets)
+        buckets = self.buck.create_bucket("zackdoe@gmail.com", "name", "status")
+        new = len(list_of_buckets)
+        self.assertEqual(initial + 1, new)
+
+    def test_delete_bucket(self):
+        """
+        Tests that a bucket is delete
+
+        """
+        self.auth.add_user("Zack", "zack@awesome.com", "pass")
+        list_of_buckets = self.buck.bucket_list_dictionaries.get("zack@awesome.com")
+        buckets = self.buck.create_bucket("zack@awesome.com", "name", "state")
+        list_of_buckets.append(buckets)
+        initial = len(list_of_buckets)
+        self.buck.delete_bucket("zack@awesome.com", 0)
+        new = len(list_of_buckets)
+        self.assertEqual(initial - 1, new)
+
+    def test_view_single_bucket(self):
+        """
+        Tests that a bucket is delete
+
+        """
+        self.auth.add_user("Zack", "zack@great.com", "pass")
+        list_of_buckets = self.buck.bucket_list_dictionaries.get("zack@great.com")
+        buckets = self.buck.create_bucket("zack@great.com", "name", "state")
+        list_of_buckets.append(buckets)
+        bucket =self.buck.view_single_bucket("zack@great.com",0)
+        self.assertIsInstance(bucket,BucketList)
 
 
 if __name__ == '__main__':

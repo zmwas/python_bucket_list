@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <title>Bucketlist</title>
+
+</head>
+<body>
+<div class="header">
+    <ul>
+        <li><a href="#"><span class="brand">Bucketlist</span></a></li>
+        <li><img src="images/create.png"/> Add list item</li>
+        <li><img src="images/logout.png"/> Logout</li>
+
+    </ul>
+    <hr/>
+</div>
+
+<div class="title">
+    <a href="bucket-item"><h1>{{single_bucket[0]}}</h1></a>
+</div>
+
+
+<div class="bucket-lists">
+    <ol>
+        <li><span class="item-name">List item one</span>
+            <button class="image-button"><img src="images/delete.png"/>
+            </button>
+            <button><img src="images/edit.png" class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
+        </li>
+
+        <li><span class="item-name">List item two</span>
+            <button class="image-button"><img src="images/delete.png"/></button>
+            <button><img src="images/edit.png"
+                         class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
+        </li>
+        </li>
+
+
+        <li><span class="item-name">List item three</span>
+            <button class="image-button"><img src="images/delete.png"/></button>
+            <button><img src="images/edit.png"
+                         class="item-image"/></button>
+            <select>
+                <option value="Completed" class="completed">Completed</option>
+                <option value="In progress" class="progress">In Progress</option>
+                <option value="On Ice" class="ice">On Ice</option>
+            </select>
+        </li>
+        </li>
+
+
+    </ol>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,65 +1,59 @@
-from flask import Flask, render_template, redirect, request
-
-from bucket_app.forms import RegistrationForm, LoginForm, CreateBucketListForm
 from controllers.user_controller import UserAuth
+from flask import (Flask, render_template,
+                   redirect)
+from bucket_app.forms import (RegistrationForm,
+                   LoginForm, CreateBucketListForm,
+                   CreateBucketItemForm)
+
 from controllers.bucket_controller import BucketController
 
 app = Flask(__name__)
 auth = UserAuth()
 bucket = BucketController()
+val = 0
 
 
-
-
-@app.route('/register', methods=["GET", "POST"])
-def register():
+@app.route('/', methods=['GET', 'POST'])
+def index():
     if auth.current_user.is_logged_in:
-        return redirect('/bucket')
+        return redirect('/main')
 
-    form = RegistrationForm(csrf_enabled=False)
-
-    if form.validate_on_submit():
-        name = form.name.data
-        email = form.email.data
-        password = form.password.data
-        response = auth.add_user(name, email, password)
-        if type(response) == list:
-            return redirect('/login')
-            print(response)
-            print(name, password)
-        elif response == 'That email is taken':
-            redirect('/register')
-            print(response)
-
-    return render_template('registration.html', form=form)
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if auth.current_user.is_logged_in:
-        return redirect('/bucket')
-
-    form = LoginForm(csrf_enabled=False)
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
+    login_form = LoginForm(csrf_enabled=False)
+    if login_form.validate_on_submit():
+        email = login_form.email.data
+        password = login_form.password.data
 
         response = auth.login(email, password)
-        print(response)
         if response == 'Welcome':
-            print(auth.current_user)
-            return redirect('/bucket')
+            return redirect('/main')
 
-    return render_template('login.html', form=form)
+    registration_form = RegistrationForm(csrf_enabled=False)
+
+    if registration_form.validate_on_submit():
+        name = registration_form.name.data
+        email = registration_form.email.data
+        password = registration_form.password.data
+        response = auth.add_user(name, email, password)
+        if type(auth.add_user(name, email, password)) == list:
+            return redirect('/')
+        elif response == 'That email is taken':
+            redirect('/')
+
+    return render_template('index.html', login_form=login_form,
+                           registration_form=registration_form)
 
 
 @app.route('/bucket', methods=['GET', 'POST'])
 def create_bucket_list():
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+
     form = CreateBucketListForm(csrf_enabled=False)
 
     if form.validate_on_submit():
         name = form.bucket_name.data
-        b = bucket.create_bucket(auth.current_user.email, name, completion_status="On Ice")
+        bucket.create_bucket(auth.current_user.email, name,
+                             completion_status="On Ice")
 
         return redirect('/main')
 
@@ -68,18 +62,57 @@ def create_bucket_list():
 
 @app.route('/main', methods=['GET'])
 def view_bucket_lists():
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    form = CreateBucketListForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        bucket.add_bucket_item(auth.current_user.email, val, form.bucket_name.data)
+        print(bucket.bucket_list_dictionaries)
+
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
 
-    return render_template('view_buckets.html', buckets=buckets)
+    if buckets:
+        return render_template('main_page.html', buckets=buckets, form=form)
+    else:
+        return render_template('main_page.html', form=form)
 
 
-@app.route('/<id>', methods=['GET'])
+@app.route('/<int:id>', methods=['GET'])
 def view_bucket_items(id):
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
     val = id
-    buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
-    single_bucket = buckets[int(val)-1]
+    form = CreateBucketItemForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        bucket.add_bucket_item(auth.current_user.email, val, form.bucket_item_name.data)
+        print(bucket.bucket_list_dictionaries)
+        return redirect('/main')
 
-    return render_template('view_bucket_items.html', single_bucket=single_bucket)
+    buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
+    single_bucket = buckets[int(val) - 1]
+
+    return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form)
+
+
+@app.route('/bucket-item', methods=['GET', 'POST'])
+def create_bucket_items():
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    form = CreateBucketItemForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        bucket.add_bucket_item(auth.current_user.email, val, form.bucket_item_name.data)
+        print(bucket.bucket_list_dictionaries)
+
+    return render_template("create_items.html", form=form, id=id)
+
+
+@app.route('/remove/<id>')
+def delete_bucket(id):
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    val = int(id) - 1
+    bucket.delete_bucket(auth.current_user.email, val)
+    return redirect('/main')
 
 
 if __name__ == '__main__':

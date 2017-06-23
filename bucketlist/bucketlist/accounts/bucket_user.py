@@ -16,8 +16,7 @@ class BucketUser(object):
     """
 
     __password = ""
-
-    def __init__(self, name=None, email=None, is_logged_in=False):
+    def __init__(self,name=None, email=None, is_logged_in=False):
         self.name = name
         self.email = email
         self.__password = ""

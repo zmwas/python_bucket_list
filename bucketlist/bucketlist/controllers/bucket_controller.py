@@ -1,37 +1,97 @@
+"""This module contains a class that creates bucket lists and bucket items
+
+"""
+
 from buckets.bucket_items import BucketListItems
 from buckets.buckets import BucketList
 
 
 class BucketController():
+    """Class for bucket controller method that create bucket and bucket items.
+
+    """
+
+    # This is  a dictionary that contains the user email as the key and the user's list of bucket lists as the value
     bucket_list_dictionaries = {}
 
     def create_bucket(self, email, name, completion_status):
+        """
+        Args
+            email (str): Email  of the user
+            name (str): Name of the user
+            completion_status(str): How far along you are in your bucket list
+        Returns
+            buckets (list): The list of the user's bucket list
+        """
+
         bucketlist = BucketList()
+        # Retrieve the list of a user's buckets given the email as the key
         buckets = self.bucket_list_dictionaries.get(email)
+        # Check if the user already has bucket lists
         if buckets:
             for bucket in buckets:
-                print(bucket)
+                # If there exists a bucket list with a similar name return an error message
                 if name == bucket[0]:
                     return "Try another name for your bucket"
-
+            # Create a bucket list and append it to the user's list of bucket list
             bucketlist.create_bucket_list(name, completion_status)
             buckets.append(bucketlist)
         else:
+            # Create a bucket list and append it to the user's list of bucket list if the user
             bucketlist.create_bucket_list(name, completion_status)
             buckets.append(bucketlist)
 
         return buckets
 
-    def add_bucket_item(self, email, id, name, completion_status):
-        bucket_item = BucketListItems()
-        bucket_item.create_bucket_items(name, completion_status)
+    def add_bucket_item(self, email, id, name, completion_status="On Ice"):
+        """
+        Args
+            email (str): Email  of the user
+            id (int): The id of the bucket list you want to add the item in
+            name (str): Name of the bucket item
+            completion_status(str): Whether a task is completed or not
+        Returns
+            single_bucket (list): The list of the bucket items
+        """
+
+        bucket_item = BucketListItems(name, completion_status)
+        # Retrieve the list of a user's buckets given the email as the key
         buckets = self.bucket_list_dictionaries.get(email)
-        print(self.bucket_list_dictionaries.__dict__)
+        # Retrieve a single bucket list given the index of the list
         single_bucket = buckets[id]
+        # Add an item to the bucket list
+        single_bucket.append(bucket_item)
+        print(single_bucket)
 
         return single_bucket
 
-    def view_single_bucket(self,email,id):
+    def view_single_bucket(self, email, id):
+        """
+        Args
+            email (str): Email  of the user
+            id (int): The id of the bucket list you want to view
+
+        Returns
+            single_bucket (list): The list of the bucket items
+        """
         buckets = self.bucket_list_dictionaries.get(email)
-        bucket=buckets[id]
+        bucket = buckets[id]
         return bucket
+
+    def delete_bucket(self, email, id):
+        """
+        Args
+            email (str): Email  of the user
+            id (int): The id of the bucket list you want to delete
+
+        Returns
+            buckets (list): The list of the bucket items
+        """
+
+        buckets = self.bucket_list_dictionaries.get(email)
+        # Retrieve a single bucket list given the index of the list
+        bucket = buckets[id]
+        buckets.remove(bucket)
+        return buckets
+
+
