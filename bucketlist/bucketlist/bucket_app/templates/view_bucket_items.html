@@ -15,7 +15,7 @@
 
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <h1 class="navbar-brand" style="font-size: 25px">Bucketlist</h1>
+                    <a href="/main"><h1 class="navbar-brand" style="font-size: 25px">Bucketlist</h1></a>
 
 
                 </div>
@@ -50,7 +50,6 @@
 
     {% for item in (single_bucket)[2:] %}
 
-    {% if item.name %}
     <div class="row">
         <div class="col-md-1"><h2> {{loop.index}}</h2></div>
         <div class="col-md-5">
@@ -68,7 +67,6 @@
         </div>
         <div class="col-md-2"></div>
     </div>
-    {% endif %}
     {% endfor %}
 
 
