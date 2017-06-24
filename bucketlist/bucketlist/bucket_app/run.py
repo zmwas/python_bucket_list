@@ -1,6 +1,6 @@
 from controllers.user_controller import UserAuth
 from flask import (Flask, render_template,
-                   redirect)
+                   redirect, request)
 from bucket_app.forms import (RegistrationForm,
                               LoginForm, CreateBucketListForm,
                               CreateBucketItemForm)
@@ -105,7 +105,7 @@ def view_bucket_items(id):
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
     single_bucket = buckets[int(val) - 1]
 
-    return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form)
+    return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form, id=id)
 
 
 @app.route('/bucket-item', methods=['GET', 'POST'])
@@ -116,6 +116,7 @@ def create_bucket_items():
     if form.validate_on_submit():
         bucket.add_bucket_item(auth.current_user.email, val, form.bucket_item_name.data)
         print(bucket.bucket_list_dictionaries)
+        return redirect(request.referrer)
 
     return render_template("create_items.html", form=form, id=id)
 
@@ -129,6 +130,18 @@ def delete_bucket(id):
         return redirect('/')
     val = int(id) - 1
     bucket.delete_bucket(auth.current_user.email, val)
+    return redirect('/main')
+
+
+@app.route('/remove/<id>/<name>')
+def delete_bucket_item(id, name):
+    """
+    View that  deletes bucket lists item
+    """
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    val = int(id) - 1
+    bucket.delete_bucket_item(auth.current_user.email, val, name)
     return redirect('/main')
 
 
