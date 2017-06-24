@@ -61,7 +61,6 @@ class BucketController():
         single_bucket = buckets[id]
         # Add an item to the bucket list
         single_bucket.append(bucket_item)
-        print(single_bucket)
 
         return single_bucket
 
@@ -94,4 +93,24 @@ class BucketController():
         buckets.remove(bucket)
         return buckets
 
+    def delete_bucket_item(self, email, id, name):
+        """
+       Args
+           email (str): Email  of the user
+           id (int): The id of the bucket list you want to delete
 
+       Returns
+           bucket (list): The list of the  items after an item is removed
+       """
+        buckets = self.bucket_list_dictionaries.get(email)
+        # Retrieve a single bucket
+        bucket = buckets[id]
+        print(bucket)
+        # Looop through the items and find the item matching the name
+        for item in bucket[2:]:
+            print(item)
+            if name == item.name:
+                bucket.remove(item)
+
+        print(bucket)
+        return bucket
