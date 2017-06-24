@@ -51,7 +51,7 @@ class BucketListTestCase(unittest.TestCase):
 
     def test_delete_bucket(self):
         """
-        Tests that a bucket is delete
+        Tests that a bucket is deleted
 
         """
         self.auth.add_user("Zack", "zack@awesome.com", "pass")
@@ -65,15 +65,31 @@ class BucketListTestCase(unittest.TestCase):
 
     def test_view_single_bucket(self):
         """
-        Tests that a bucket is delete
+        Tests that a bucket can be viewed
 
         """
         self.auth.add_user("Zack", "zack@great.com", "pass")
         list_of_buckets = self.buck.bucket_list_dictionaries.get("zack@great.com")
         buckets = self.buck.create_bucket("zack@great.com", "name", "state")
         list_of_buckets.append(buckets)
-        bucket =self.buck.view_single_bucket("zack@great.com",0)
-        self.assertIsInstance(bucket,BucketList)
+        bucket = self.buck.view_single_bucket("zack@great.com", 0)
+        self.assertIsInstance(bucket, BucketList)
+
+    def test_delete_bucket_item(self):
+        """
+        Test that a bucket list item can be viewed
+
+        """
+        user = self.auth.add_user("Zack", "zack@happy.com", "pass")
+        list_of__buckets = self.buck.bucket_list_dictionaries.get("zack@happy.com")
+        buckets = self.buck.create_bucket("zack@happy.com", " A name", "status")
+        list_of__buckets.append(buckets)
+        bucket_item = BucketListItems("Make something")
+        self.buck.add_bucket_item("zack@happy.com", 0, bucket_item.name, bucket_item.completion_status)
+        bucket_item = BucketListItems("Make something else")
+        initial = len(self.buck.add_bucket_item("zack@happy.com", 0, bucket_item.name, bucket_item.completion_status))
+        deleted = len(self.buck.delete_bucket_item("zack@happy.com", 0, "Make something"))
+        self.assertEqual(initial - 1, deleted)
 
 
 if __name__ == '__main__':
