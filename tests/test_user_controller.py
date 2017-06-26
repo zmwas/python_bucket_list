@@ -5,7 +5,7 @@ This module tests user controller  controller methods
 
 import unittest
 
-from controllers.user_controller import UserAuth
+from bucket_app.user_controller import UserAuth
 
 
 class TestController(unittest.TestCase):

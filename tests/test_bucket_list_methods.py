@@ -2,7 +2,8 @@
 
 """
 import unittest
-from buckets.buckets import BucketList
+
+from bucket_app.buckets import BucketList
 
 
 class TestBucket(unittest.TestCase):

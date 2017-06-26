@@ -4,7 +4,7 @@
 
 import unittest
 
-from accounts.bucket_user import BucketUser
+from bucket_app.bucket_user import BucketUser
 
 
 class UserTestCase(unittest.TestCase):

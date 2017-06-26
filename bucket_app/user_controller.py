@@ -2,8 +2,8 @@
 
 """
 
-from accounts.bucket_user import BucketUser
-from controllers.bucket_controller import BucketController
+from bucket_user import BucketUser
+from bucket_controller import BucketController
 
 
 class UserAuth():

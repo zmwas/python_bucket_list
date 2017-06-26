@@ -2,8 +2,9 @@
 
 """
 
-from buckets.bucket_items import BucketListItems
-from buckets.buckets import BucketList
+from buckets import BucketList
+
+from bucket_items import BucketListItems
 
 
 class BucketController():

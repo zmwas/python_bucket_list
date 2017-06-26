@@ -5,10 +5,11 @@ This module tests bucket controller methods
 
 import unittest
 
-from buckets.bucket_items import BucketListItems
-from buckets.buckets import BucketList
-from controllers.bucket_controller import BucketController
-from controllers.user_controller import UserAuth
+from bucket_app.bucket_items import BucketListItems
+from bucket_app.buckets import BucketList
+from bucket_app.bucket_controller import BucketController
+from bucket_app.bucket_items import BucketListItems
+from bucket_app.user_controller import UserAuth
 
 
 class BucketListTestCase(unittest.TestCase):

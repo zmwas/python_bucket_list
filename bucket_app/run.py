@@ -1,11 +1,10 @@
-from controllers.user_controller import UserAuth
+from user_controller import UserAuth
 from flask import (Flask, render_template,
                    redirect, request)
-from bucket_app.forms import (RegistrationForm,
+from forms import (RegistrationForm,
                               LoginForm, CreateBucketListForm,
                               CreateBucketItemForm)
-
-from controllers.bucket_controller import BucketController
+from bucket_controller import BucketController
 
 app = Flask(__name__)
 auth = UserAuth()
