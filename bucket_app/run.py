@@ -124,7 +124,7 @@ def update_bucket_item(id, old_name):
     return redirect(request.referrer)
 
 
-@app.route('/<int:id>', methods=['GET','POST'])
+@app.route('/<int:id>', methods=['GET', 'POST'])
 def view_bucket_items(id):
     """
     View that renders the bucket items page
@@ -153,7 +153,7 @@ def view_bucket_items(id):
 def create_bucket_items(id):
     if not auth.current_user.is_logged_in:
         return redirect('/')
-    val = id -1
+    val = id - 1
     form = CreateBucketItemForm(csrf_enabled=False)
     if form.validate_on_submit():
         bucket.add_bucket_item(auth.current_user.email, val, form.bucket_item_name.data)
@@ -185,7 +185,6 @@ def delete_bucket_item(id, name):
     val = int(id) - 1
     bucket.delete_bucket_item(auth.current_user.email, val, name)
     return redirect(request.referrer)
-
 
 
 if __name__ == '__main__':

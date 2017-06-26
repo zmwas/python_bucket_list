@@ -46,7 +46,7 @@ class UserAuth():
         """
         # Get the list of users registered
         message = ""
-        users =self.list_of_users
+        users = self.list_of_users
         for user in users:
             # Loop through each user and check for one who matches the email and password provided
             if email == user.email and password == user.get_password():

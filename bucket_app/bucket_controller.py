@@ -3,7 +3,6 @@
 """
 
 from bucket_app.buckets import BucketList
-
 from bucket_app.bucket_items import BucketListItems
 from bucket_app.bucket_items import BucketListItems
 
@@ -100,6 +99,8 @@ class BucketController():
        Args
            email (str): Email  of the user
            id (int): The id of the bucket list you want to delete
+           name (str): Name of the bucket item
+
 
        Returns
            bucket (list): The list of the  items after an item is removed
@@ -132,17 +133,20 @@ class BucketController():
         buckets = self.bucket_list_dictionaries.get(email)
         # Retrieve a single bucket list given the index of the list
         bucket = buckets[id]
-        bucket[0]=name
-        bucket[1]=completion_status
+        bucket[0] = name
+        bucket[1] = completion_status
         print(name)
         print(completion_status)
         return bucket
 
-    def update_bucket_item(self, email, id,old_name, name, completion_status):
+    def update_bucket_item(self, email, id, old_name, name, completion_status):
         """
        Args
            email (str): Email  of the user
            id (int): The id of the bucket list you want to delete
+           old_name (str): Name of the bucket item
+           name (str): New name of the bucket item
+           completion_status (str): New status of the bucket item
 
        Returns
            bucket (list): The list of the  items after an item is updated
@@ -153,7 +157,7 @@ class BucketController():
         print(bucket)
         # Looop through the items and find the item matching the name
         for item in bucket[2:]:
-            if old_name ==item.name:
+            if old_name == item.name:
                 item.update_bucket_item(name, completion_status)
 
         print(bucket)
