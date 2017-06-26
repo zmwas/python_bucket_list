@@ -27,6 +27,16 @@ class TestController(unittest.TestCase):
         self.assertTrue(len(self.auth.list_of_users) <
                         len(self.auth.add_user("Zack", "johndoe@gmail.com", "Hunter1")))
 
+    def test_login(self):
+        """
+        Tests a login is successful
+
+        """
+        self.auth.add_user("Zack","zac@gmail.com","1234")
+        self.assertEqual(self.auth.login("zac@gmail.com","1234"),"Welcome")
+
+
+
 
     def test_unsuccessful_login(self):
         """
