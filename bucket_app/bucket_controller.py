@@ -134,3 +134,22 @@ class BucketController():
         bucket.update_bucket_list(name, completion_status)
         return bucket
 
+     def delete_bucket_item(self, email, id, name,completion_status):
+        """
+       Args
+           email (str): Email  of the user
+           id (int): The id of the bucket list you want to delete
+
+       Returns
+           bucket (list): The list of the  items after an item is removed
+       """
+        buckets = self.bucket_list_dictionaries.get(email)
+        # Retrieve a single bucket
+        bucket = buckets[id]
+        print(bucket)
+        # Looop through the items and find the item matching the name
+        for item in bucket[2:]:
+            item.update_bucket_item(name,completion_status)
+
+        print(bucket)
+        return bucket
