@@ -37,3 +37,18 @@ class BucketList(list):
         self.append(name)
         self.append(completion_status)
         return self
+
+    def update_bucket_list(self, name, completion_status):
+        """
+        Args
+            name (str): Name of the bucketlist
+            completion_status (str):  How far one has gotten in the bucket list. Defaults to On Ice
+        Returns
+            bucketlist(obj):Bucket list object
+
+        """
+        self.name = name
+        self.completion_status = completion_status
+        self.append(name)
+        self.append(completion_status)
+        return self
