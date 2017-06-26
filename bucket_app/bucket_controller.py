@@ -131,7 +131,10 @@ class BucketController():
         buckets = self.bucket_list_dictionaries.get(email)
         # Retrieve a single bucket list given the index of the list
         bucket = buckets[id]
-        bucket.update_bucket_list(name, completion_status)
+        bucket[0]=name
+        bucket[1]=completion_status
+        print(name)
+        print(completion_status)
         return bucket
 
     def update_bucket_item(self, email, id, name, completion_status):

@@ -72,15 +72,16 @@ def create_bucket_list():
 
 
 @app.route('/update/<int:id>',methods=['GET','POST'])
-def update_bucket():
+def update_bucket(id):
     if not auth.current_user.is_logged_in:
         return redirect('/')
-    # val = int(id) - 1
+    val = id -1
     u_form = UpdateBucketListForm(csrf_enabled=False)
     if u_form.validate_on_submit():
-        name = u_form.bucket_name.data
+        name = u_form.bucket.data
         status = dict(STATUS).get(u_form.completion_status.data)
-    bucket.update_bucket(auth.current_user.email, val, name, status)
+        print(name)
+        bucket.update_bucket(auth.current_user.email, val, name, status)
     return redirect(request.referrer)
 
 
@@ -102,10 +103,11 @@ def view_bucket_lists():
 
 
     u_form = UpdateBucketListForm(csrf_enabled=False)
-    if u_form.validate_on_submit() and form.submit.data:
+    if u_form.validate_on_submit():
         name = u_form.bucket.data
         status = dict(STATUS).get(u_form.completion_status.data)
-        bucket.update_bucket(auth.current_user.email, val, name, status)
+
+        bucket.update_bucket(auth.current_user.email, id, name, status)
         return redirect(request.referrer)
 
     if buckets:
