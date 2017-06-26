@@ -134,4 +134,3 @@ class BucketController():
         bucket.update_bucket_list(name, completion_status)
         return bucket
 
-    
