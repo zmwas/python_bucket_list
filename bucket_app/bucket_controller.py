@@ -134,7 +134,7 @@ class BucketController():
         bucket.update_bucket_list(name, completion_status)
         return bucket
 
-    def delete_bucket_item(self, email, id, name, completion_status):
+    def update_bucket_item(self, email, id, name, completion_status):
         """
        Args
            email (str): Email  of the user

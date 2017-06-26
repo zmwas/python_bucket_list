@@ -3,7 +3,7 @@ from flask import (Flask, render_template,
                    redirect, request)
 from forms import (RegistrationForm,
                    LoginForm, CreateBucketListForm,
-                   CreateBucketItemForm)
+                   CreateBucketItemForm, UpdateBucketListForm, UpdateBucketItemForm, STATUS)
 from bucket_controller import BucketController
 
 app = Flask(__name__)
@@ -71,7 +71,20 @@ def create_bucket_list():
     return render_template('create_list.html', form=form)
 
 
-@app.route('/main', methods=['GET'])
+@app.route('/update/<int:id>',methods=['GET','POST'])
+def update_bucket():
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    # val = int(id) - 1
+    u_form = UpdateBucketListForm(csrf_enabled=False)
+    if u_form.validate_on_submit():
+        name = u_form.bucket_name.data
+        status = dict(STATUS).get(u_form.completion_status.data)
+    bucket.update_bucket(auth.current_user.email, val, name, status)
+    return redirect(request.referrer)
+
+
+@app.route('/main', methods=['GET','POST'])
 def view_bucket_lists():
     """
     View that renders the bucket lists
@@ -80,18 +93,25 @@ def view_bucket_lists():
     if not auth.current_user.is_logged_in:
         return redirect('/')
     form = CreateBucketListForm(csrf_enabled=False)
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form.submit.data:
         bucket.add_bucket_item(auth.current_user.email, val, form.bucket_name.data)
         print(bucket.bucket_list_dictionaries)
         return redirect(request.referrer)
 
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
-    if val > len(buckets):
-        return redirect('page_not_found')
+
+
+    u_form = UpdateBucketListForm(csrf_enabled=False)
+    if u_form.validate_on_submit() and form.submit.data:
+        name = u_form.bucket.data
+        status = dict(STATUS).get(u_form.completion_status.data)
+        bucket.update_bucket(auth.current_user.email, val, name, status)
+        return redirect(request.referrer)
+
     if buckets:
-        return render_template('main_page.html', buckets=buckets, form=form)
+        return render_template('main_page.html', buckets=buckets, form=form, u_form=u_form)
     else:
-        return render_template('main_page.html', form=form)
+        return render_template('main_page.html', form=form, u_form=u_form)
 
 
 @app.route('/<int:id>', methods=['GET'])
@@ -109,12 +129,19 @@ def view_bucket_items(id):
         return redirect(request.referrer)
 
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
-
-    single_bucket = buckets[int(val) - 1]
-    if val > len(single_bucket):
+    if val > len(buckets):
         return redirect('page_not_found')
 
-    return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form, id=id)
+    single_bucket = buckets[int(val) - 1]
+
+    u_form = UpdateBucketListForm(csrf_enabled=False)
+    if u_form.validate_on_submit():
+        name = u_form.bucket.data
+        status = dict(STATUS).get(u_form.completion_status.data)
+        bucket.update_bucket(auth.current_user.email, val, name, status)
+        return redirect(request.referrer)
+
+    return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form, u_form=u_form, id=id)
 
 
 @app.route('/bucket-item', methods=['GET', 'POST'])
@@ -154,23 +181,20 @@ def delete_bucket_item(id, name):
     return redirect(request.referrer)
 
 
-@app.route('/update/<int:id>')
-def update_bucket(id):
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
-    val = id -1
-    bucket.update_bucket(auth.current_user.email,val,name,completion_status)
-    return redirect(request.referrer)
-
-@app.route('/update/<int:id>/<name>')
-def update_bucket_item(id,name):
+@app.route('/update/<int:id>/<name>',methods=['PUT'])
+def update_bucket_item(id, name):
     if not auth.current_user.is_logged_in:
         return redirect('/')
 
-    val = id -1
-    bucket.update_bucket_item(auth.current_user.email,val,name,completion_status)
-    return redirect(request.referrer)
+    val = id - 1
+    u_form = UpdateBucketItemForm(csrf_enabled=False)
+    if u_form.validate_on_submit():
+        name = form.bucket.data
+        name = form.bucket.data
+        status = dict(STATUS).get(u_form.completion_status.data)
 
+    bucket.update_bucket_item(auth.current_user.email, val, name, completion_status)
+    return redirect(request.referrer)
 
 
 if __name__ == '__main__':
