@@ -111,7 +111,7 @@ def view_bucket_items(id):
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
 
     single_bucket = buckets[int(val) - 1]
-    if val> len(single_bucket):
+    if val > len(single_bucket):
         return redirect('page_not_found')
 
     return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form, id=id)
@@ -152,6 +152,25 @@ def delete_bucket_item(id, name):
     val = int(id) - 1
     bucket.delete_bucket_item(auth.current_user.email, val, name)
     return redirect(request.referrer)
+
+
+@app.route('/update/<int:id>')
+def update_bucket(id):
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+    val = id -1
+    bucket.update_bucket(auth.current_user.email,val,name,completion_status)
+    return redirect(request.referrer)
+
+@app.route('/update/<int:id>/<name>')
+def update_bucket_item(id,name):
+    if not auth.current_user.is_logged_in:
+        return redirect('/')
+
+    val = id -1
+    bucket.update_bucket_item(auth.current_user.email,val,name,completion_status)
+    return redirect(request.referrer)
+
 
 
 if __name__ == '__main__':
