@@ -57,4 +57,6 @@ class UserAuth():
 
             else:
                 message = "Wrong email or password"
+                print(user.email)
+                print(user.get_password())
                 return message

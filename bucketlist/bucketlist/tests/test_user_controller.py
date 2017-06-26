@@ -32,8 +32,7 @@ class TestController(unittest.TestCase):
         Tests a login is successful
 
         """
-        self.auth.add_user("Zack","zac@gmail.com","1234")
-        self.assertEqual(self.auth.login("zac@gmail.com","1234"),"Welcome")
+        self.assertEqual(self.auth.login("johndoe@gmail.com","password"),"Welcome")
 
 
 
