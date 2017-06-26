@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SelectField
 from wtforms.validators import Email, InputRequired
 
+STATUS = [('Completed,Completed'), ('In Progress', 'In Progress'),
+          ('On Ice', 'On Ice')]
+
 
 class RegistrationForm(FlaskForm):
     name = StringField('name', validators=[InputRequired()])
@@ -24,11 +27,9 @@ class CreateBucketItemForm(FlaskForm):
 
 class UpdateBucketListForm(FlaskForm):
     bucket_name = StringField('Bucket Name ', validators=[InputRequired()])
-    completion_status = SelectField(u'Status', choices=[('Completed,Completed'), ('In Progress', 'In Progress'),
-                                                        ('On Ice', 'On Ice')])
+    completion_status = SelectField(u'Status', choices=STATUS)
 
 
 class UpdateBucketItemForm(FlaskForm):
     bucket_item_name = StringField('Bucket list item ', validators=[InputRequired()])
-    completion_status = SelectField(u'Status', choices=[('Completed,Completed'), ('In Progress', 'In Progress'),
-                                                        ('On Ice', 'On Ice')])
+    completion_status = SelectField(u'Status', choices=STATUS)
