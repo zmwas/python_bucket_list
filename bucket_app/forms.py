@@ -28,7 +28,7 @@ class UpdateBucketListForm(FlaskForm):
                                                         ('On Ice', 'On Ice')])
 
 
-class UpdateBucketListForm(FlaskForm):
+class UpdateBucketItemForm(FlaskForm):
     bucket_item_name = StringField('Bucket list item ', validators=[InputRequired()])
     completion_status = SelectField(u'Status', choices=[('Completed,Completed'), ('In Progress', 'In Progress'),
                                                         ('On Ice', 'On Ice')])
