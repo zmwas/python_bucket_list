@@ -2,8 +2,8 @@ from user_controller import UserAuth
 from flask import (Flask, render_template,
                    redirect, request)
 from forms import (RegistrationForm,
-                              LoginForm, CreateBucketListForm,
-                              CreateBucketItemForm)
+                   LoginForm, CreateBucketListForm,
+                   CreateBucketItemForm)
 from bucket_controller import BucketController
 
 app = Flask(__name__)
@@ -15,6 +15,7 @@ val = 0
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -85,7 +86,8 @@ def view_bucket_lists():
         return redirect(request.referrer)
 
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
-
+    if val > len(buckets):
+        return redirect('page_not_found')
     if buckets:
         return render_template('main_page.html', buckets=buckets, form=form)
     else:
@@ -107,7 +109,10 @@ def view_bucket_items(id):
         return redirect(request.referrer)
 
     buckets = bucket.bucket_list_dictionaries.get(auth.current_user.email)
+
     single_bucket = buckets[int(val) - 1]
+    if val> len(single_bucket):
+        return redirect('page_not_found')
 
     return render_template('view_bucket_items.html', single_bucket=single_bucket, form=form, id=id)
 
