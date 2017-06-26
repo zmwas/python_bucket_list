@@ -47,6 +47,8 @@
 
 
 <div class="container">
+    {% set count = 1 %}
+
     {% for bucket in buckets %}
 
         <div class="row">
@@ -54,7 +56,9 @@
             <div class="col-md-1"><h2>{{ loop.index }}</h2></div>
             <div class="col-md-5">
                 <a href={{ loop.index }}>
-                    <h2>{{ bucket[0] }}</h2>
+                    <h2>{{ bucket[0] }}  {% set count = count+1 %}
+</h2>
+
                 </a>
             </div>
             <div class="col-md-2">
@@ -83,8 +87,8 @@
                     <div class="row" style="margin-left:30%">{{ u_form.bucket(size=30) }}</div>
                     <div class="row" style="margin-left:30%">{{ u_form.completion_status }}</div>
 
-                    <div class="row" style="margin-bottom: 20px;margin-left: 45%"><input type="submit"
-                                                                                         value="Update"/></div>
+                    <div class="row" style="margin-bottom: 20px;margin-left: 45%"><input type="submit" value="Update"/>
+                    </div>
 
 
                 </form>
