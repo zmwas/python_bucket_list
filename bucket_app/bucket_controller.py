@@ -134,7 +134,7 @@ class BucketController():
         bucket.update_bucket_list(name, completion_status)
         return bucket
 
-     def delete_bucket_item(self, email, id, name,completion_status):
+    def delete_bucket_item(self, email, id, name, completion_status):
         """
        Args
            email (str): Email  of the user
@@ -149,7 +149,7 @@ class BucketController():
         print(bucket)
         # Looop through the items and find the item matching the name
         for item in bucket[2:]:
-            item.update_bucket_item(name,completion_status)
+            item.update_bucket_item(name, completion_status)
 
         print(bucket)
         return bucket
