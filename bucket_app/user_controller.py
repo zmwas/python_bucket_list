@@ -11,6 +11,8 @@ class UserAuth():
     list_of_users = []
     # Class variable for checking the user who is logged in. It is set in the log in method
     current_user = BucketUser()
+    bucket_controller = BucketController()
+
 
     def add_user(self, name, email, password):
         """
@@ -31,8 +33,7 @@ class UserAuth():
         user.create_user(name, email)
         user.set_password(password)
         self.list_of_users.append(user)
-        bucket_controller = BucketController()
-        directory_entry = bucket_controller.bucket_list_dictionaries[user.email] = []
+        directory_entry = self.bucket_controller.bucket_list_dictionaries[user.email] = []
 
         return users
 

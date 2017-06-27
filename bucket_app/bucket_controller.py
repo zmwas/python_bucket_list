@@ -40,6 +40,7 @@ class BucketController():
         else:
             # Create a bucket list and append it to the user's list of bucket list if the user
             bucketlist.create_bucket_list(name, completion_status)
+
             buckets.append(bucketlist)
 
         return buckets

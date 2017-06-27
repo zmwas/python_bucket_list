@@ -8,7 +8,7 @@ from bucket_controller import BucketController
 
 app = Flask(__name__)
 auth = UserAuth()
-bucket = BucketController()
+bucket = auth.bucket_controller
 val = 0
 
 
@@ -94,8 +94,8 @@ def view_bucket_lists():
     if not auth.current_user.is_logged_in:
         return redirect('/')
     form = CreateBucketListForm(csrf_enabled=False)
-    if form.validate_on_submit() and form.submit.data:
-        bucket.add_bucket_item(auth.current_user.email, val, form.bucket_name.data)
+    if form.validate_on_submit():
+        bucket.create_bucket(auth.current_user.email, val, form.bucket_name.data)
         print(bucket.bucket_list_dictionaries)
         return redirect(request.referrer)
 
