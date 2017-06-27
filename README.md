@@ -1,7 +1,7 @@
 
 # python_bucket_list
 
-[![Build Status](https://travis-ci.org/zmwas/python_bucket_list.svg?branch=setup)][![Coverage Status](https://coveralls.io/repos/github/zmwas/python_bucket_list/badge.svg?branch=setup)]
+![Build Status](https://travis-ci.org/zmwas/python_bucket_list.svg?branch=setup)![Coverage Status](https://coveralls.io/repos/github/zmwas/python_bucket_list/badge.svg?branch=setup)
 
 ## Installation
 To install bucketlist you need python 3.4 and above.
