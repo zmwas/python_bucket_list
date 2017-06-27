@@ -4,6 +4,6 @@ python:
 # command to install dependencies
 install: "pip install -r requirements.txt"
 # command to run tests
-script: pytest
+script: pytest --with-coverage --cover-package=bucket_app
 after_success:
   - coveralls
