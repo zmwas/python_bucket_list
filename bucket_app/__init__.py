@@ -1,5 +1,8 @@
 from flask import Flask
 from bucket_app.user_controller import UserAuth
+from bucket_app.forms import (RegistrationForm, LoginForm, CreateBucketListForm,CreateBucketItemForm,
+                   UpdateBucketListForm, UpdateBucketItemForm, STATUS)
+
 
 
 #This initializes the app
@@ -11,5 +14,3 @@ bucket = auth.bucket_controller
 
 
 from bucket_app import views
-
-app.config.from_object('config')
