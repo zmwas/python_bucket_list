@@ -14,3 +14,4 @@ bucket = auth.bucket_controller
 
 
 from bucket_app import views
+app.config.from_object('config')
