@@ -1,7 +1,6 @@
-from bucket_app import (auth, bucket, app, CreateBucketListForm, CreateBucketItemForm, UpdateBucketItemForm,
-                        UpdateBucketListForm, LoginForm, RegistrationForm)
-
-from flask import render_template, redirect, request
+from bucket_app import (auth, bucket, app,CreateBucketListForm,CreateBucketItemForm,UpdateBucketItemForm,
+                        UpdateBucketListForm,LoginForm,RegistrationForm,STATUS)
+from flask import render_template,redirect, request
 
 
 @app.errorhandler(404)

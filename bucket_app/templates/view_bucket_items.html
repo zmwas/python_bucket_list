@@ -49,7 +49,9 @@
 
 <div class="container">
 
+
     {% for item in (single_bucket)[2:] %}
+
 
         <div class="row">
             <div class="col-md-1"><h2> {{ loop.index }}</h2></div>
@@ -59,56 +61,62 @@
 
             </div>
             <div class="col-md-2">
-                <a href="remove/{{ id }}/{{ item.name }}" >
+                <a href="remove/{{ id }}/{{ item.name }}">
                     <button class="btn btn-danger btn-md">Delete</button>
                 </a>
             </div>
             <div class="col-md-2">
-                <a href="/update/{{ id }}/{{ item.name }}" data-toggle="modal" data-target="#update-bucket-item">
-                    <button class="btn btn-primary btn-md"> Edit</button>
+                <a href="/update/{{ id }}/{{ item.name }}" data-toggle="modal" data-target="#update-bucket-item"
+                   id="edit-link" data-bucket-id="{{ id }}" data-bucket-name="{{ item.name }}">
+                    <button class="btn btn-primary btn-md "> Edit</button>
                 </a>
+
             </div>
             <div class="col-md-2">{{ item.completion_status }}</div>
         </div>
 
-        <div id="update-bucket-item" class="modal modal-body  modal-dialog"
-             style="background: white;height: 40%;position: absolute;overflow-y: hidden">
-            <div class="modal-header" style="text-align: center;font-size: 20px">Update bucket list</div>
-            <div class="modal-body">
-                <form method="POST" action="/update/{{ id }}/{{ item.name }}">
-
-                    <div class="row" style="margin-left:30%">{{ u_form.bucket_item_name(size=30) }}</div>
-                    <div class="row" style="margin-left:30%">{{ u_form.completion_status }}</div>
-
-                    <div class="row" style="margin-bottom: 20px;margin-left: 45%">
-                        <input type="submit" value="Update"/></div>
 
 
-                </form>
-            </div>
-        </div>
 
     {% endfor %}
 
 
 </div>
+
+<div id="update-bucket-item" class="modal modal-body  modal-dialog "
+     style="background: white;height: 40%;position: absolute;overflow-y: hidden">
+    <div class="modal-header" style="text-align: center;font-size: 20px">Update bucket list</div>
+    <div class="modal-body">
+        <form action="" method="POST">
+            <div class="row" style="margin-left:30%">{{ u_form.bucket_item_name(size=30) }}</div>
+            <div class="row" style="margin-left:30%">{{ u_form.completion_status }}</div>
+
+            <div class="row" style="margin-bottom: 20px;margin-left: 45%">
+                <input type="submit" value="Update"/></div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn btn-default btn-sm">Close</button>
+            </div>
+
+        </form>
+    </div>
+</div>
 <script src="../static/js/jquery-3.2.1.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 
-<script>
 
-    //    $('#create-bucket').on('show.bs.modal', function (event) {
-    //        var button = $(event.relatedTarget) // Button that triggered the modal
-    //        var recipient = button.data('whatever') // Extract info from data-* attributes
-    //        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    //        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    //        var modal = $(this)
-    //        modal.find('.modal-title').text('New message to ' + recipient)
-    //        modal.find('.modal-body input').val(recipient)
-    //    })
-
+    $(function () {
+        $(document).on('click','#edit-link',function (event) {
+            event.preventDefault();
+            var action_path = '/update/' + $(this).attr('data-bucket-id')+'/'+ $(this).attr('data-bucket-name');
+            $('#update-bucket-item form').attr('action', action_path);
+            $('#update-bucket-item').modal('show');
+        });
+    });
 
 </script>
+
 <div id="create-item" class="modal modal-body  modal-dialog"
      style="background: white;height: 40%;position: absolute;overflow-y: hidden">
     <div class="modal-header" style="text-align: center;font-size: 20px">Add an item</div>
@@ -128,6 +136,7 @@
     </div>
 
 </div>
+
 
 </body>
 </html>
