@@ -9,36 +9,34 @@
 
 </head>
 <body>
-<div class="container">
-    <div>
+
         <nav class="navbar navbar-default">
 
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <h1 class="navbar-brand" style="font-size: 25px">Bucketlist</h1>
+                    <span class="navbar-brand"
+                    style="font-size: 26px">Bucketlist</span>
 
 
-                </div>
-
-                <div></div>
-                <div style="float:right;margin-top: 15px;padding:10px"><a href="{{ url_for('create_bucket_list') }}"
-                                                                          data-toggle="modal"
-                                                                          data-target="#create-bucket"><img
-                        src="../static/images/create.png"></a></div>
+        <ul class=" navbar-right"style="margin-right:20px; padding-right:20px">
+            <a href="{{ url_for('create_bucket_list') }}"
+            style="margin-right:10px;padding-right:20px"
+            data-toggle="modal"
+           data-target="#create-bucket"><img
+                        src="../static/images/create.png"></a>
 
                 </a>
-                <div style="float: right;margin-top: 15px;padding: 10px">
-                    <img src="../static/images/logout.png"/></div>
+
+        <a href="/logout"><img src="../static/images/logout.png"
+            style="margin-right:10px; padding-right:20px"/></a>
 
 
-            </div>
 
+        </ul>
 
+                </div>
         </nav>
-    </div>
 
 
-</div>
 <hr/>
 
 <div class="jumbotron" style="text-align: center">
@@ -93,7 +91,8 @@
         <form method="POST" action="/bucket">
 
             <div class="row" style="margin-left:30%">{{ form.bucket_name(size=30) }}</div>
-            <div class="row" style="margin-bottom: 20px;margin-left: 45%"><input type="submit" value="Create"/></div>
+            <div class="row" style="margin-bottom: 20px;margin-left: 45%">
+                <input type="submit" value="Create"/></div>
 
 
         </form>

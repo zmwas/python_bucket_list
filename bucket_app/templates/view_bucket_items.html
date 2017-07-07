@@ -9,37 +9,40 @@
 
 </head>
 <body>
-<div class="container">
-    <div>
+
         <nav class="navbar navbar-default">
 
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="/main"><h1 class="navbar-brand" style="font-size: 25px">Bucketlist</h1></a>
+
+                    <a href="/main" ><span class="navbar-brand" style="font-size: 26px">Bucketlist</span></a>
 
 
-                </div>
 
-                <div></div>
-                <div style="float:right;margin-top: 15px;padding:10px"><a
+
+            <ul class="navbar-right" style="margin-right:20px; padding-right:20px">
+
+                <a style="margin-right:10px;padding-right:20px"
                         href="{{ url_for('create_bucket_items',id=id) }}"
                         data-toggle="modal"
                         data-target="#create-item"><img
-                        src="../static/images/create.png"></a></div>
+                        src="../static/images/create.png"></a>
 
                 </a>
-                <div style="float: right;margin-top: 15px;padding: 10px">
-                    <img src="../static/images/logout.png"/></div>
 
 
-            </div>
+
+
+            <a href="'/logout'"><img src="../static/images/logout.png" style="margin-right:10px; padding-right:20px" /></a>
+            </ul>
+
+          </div>
+
+
+
 
 
         </nav>
-    </div>
 
-
-</div>
 <hr/>
 
 <div class="jumbotron" style="text-align: center">

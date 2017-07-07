@@ -176,3 +176,11 @@ def delete_bucket_item(id, name):
     val = int(id) - 1
     bucket.delete_bucket_item(auth.current_user.email, val, name)
     return redirect(request.referrer)
+@app.route('/logout')
+def logout():
+    """
+    View to logout users
+    """
+    if auth.current_user.is_logged_in:
+        auth.current_user.is_logged_in = False
+        return redirect('/')
