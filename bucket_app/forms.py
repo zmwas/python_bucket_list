@@ -7,14 +7,14 @@ STATUS = [('Completed','Completed'), ('In Progress', 'In Progress'),
 
 
 class RegistrationForm(FlaskForm):
-    name = StringField('name', validators=[InputRequired()])
-    email = StringField('email', validators=[Email()])
-    password = PasswordField('password')
+    name = StringField('Name', validators=[InputRequired()])
+    email = StringField('Email', validators=[Email()])
+    password = PasswordField('Password')
 
 
 class LoginForm(FlaskForm):
-    email = StringField('email', validators=[Email()])
-    password = PasswordField('password', validators=[InputRequired()])
+    email = StringField('Email ', validators=[Email()])
+    password = PasswordField('Password ', validators=[InputRequired()])
 
 
 class CreateBucketListForm(FlaskForm):
