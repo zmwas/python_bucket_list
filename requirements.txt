@@ -26,3 +26,6 @@ wrapt==1.10.10
 WTForms==2.1
 yarg==0.1.9
 pytest-cov==2.5.1
+gunicorn==19.7.1
+
+
