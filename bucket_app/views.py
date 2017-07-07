@@ -186,3 +186,4 @@ def logout():
         auth.current_user.is_logged_in = False
         del auth.current_user
         return redirect('/')
+    return redirect('/')    
