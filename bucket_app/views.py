@@ -26,6 +26,7 @@ def index():
         if response == 'Welcome':
             return redirect('/main')
 
+
     registration_form = RegistrationForm(csrf_enabled=False)
 
     if registration_form.validate_on_submit():
@@ -47,7 +48,7 @@ def create_bucket_list():
     """
     View that renders the bucket list  creation form
     """
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
 
     form = CreateBucketListForm(csrf_enabled=False)
@@ -64,7 +65,7 @@ def create_bucket_list():
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update_bucket(id):
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     val = id - 1
     u_form = UpdateBucketListForm(csrf_enabled=False)
@@ -82,7 +83,7 @@ def view_bucket_lists():
     View that renders the bucket lists
     """
 
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     form = CreateBucketListForm(csrf_enabled=False)
     if form.validate_on_submit():
@@ -102,7 +103,7 @@ def view_bucket_lists():
 
 @app.route('/update/<int:id>/<old_name>', methods=['GET', 'POST'])
 def update_bucket_item(id, old_name):
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
 
     val = id - 1
@@ -120,7 +121,7 @@ def view_bucket_items(id):
     """
     View that renders the bucket items page
     """
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     val = id
     form = CreateBucketItemForm(csrf_enabled=False)
@@ -142,7 +143,7 @@ def view_bucket_items(id):
 
 @app.route('/bucket-item/<int:id>', methods=['GET', 'POST'])
 def create_bucket_items(id):
-    if  auth.current_user == "":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     val = id - 1
     form = CreateBucketItemForm(csrf_enabled=False)
@@ -159,7 +160,7 @@ def delete_bucket(id):
     """
     View that renders the deletes bucket lists
     """
-    if  auth.current_user == "":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     val = int(id) - 1
     bucket.delete_bucket(auth.current_user.email, val)
@@ -171,7 +172,7 @@ def delete_bucket_item(id, name):
     """
     View that  deletes bucket lists item
     """
-    if  auth.current_user=="":
+    if not auth.current_user.is_logged_in:
         return redirect('/')
     val = int(id) - 1
     bucket.delete_bucket_item(auth.current_user.email, val, name)
@@ -183,5 +184,5 @@ def logout():
     """
     if auth.current_user.is_logged_in:
         auth.current_user.is_logged_in = False
-        auth.current_user =""
+        del auth.current_user
         return redirect('/')
