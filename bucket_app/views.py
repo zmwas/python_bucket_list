@@ -48,8 +48,7 @@ def create_bucket_list():
     """
     View that renders the bucket list  creation form
     """
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+
 
     form = CreateBucketListForm(csrf_enabled=False)
 
@@ -65,8 +64,7 @@ def create_bucket_list():
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update_bucket(id):
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+
     val = id - 1
     u_form = UpdateBucketListForm(csrf_enabled=False)
     if u_form.validate_on_submit():
@@ -103,8 +101,7 @@ def view_bucket_lists():
 
 @app.route('/update/<int:id>/<old_name>', methods=['GET', 'POST'])
 def update_bucket_item(id, old_name):
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+
 
     val = id - 1
     u_form = UpdateBucketItemForm(csrf_enabled=False)
@@ -143,8 +140,7 @@ def view_bucket_items(id):
 
 @app.route('/bucket-item/<int:id>', methods=['GET', 'POST'])
 def create_bucket_items(id):
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+
     val = id - 1
     form = CreateBucketItemForm(csrf_enabled=False)
     if form.validate_on_submit():
@@ -160,8 +156,7 @@ def delete_bucket(id):
     """
     View that renders the deletes bucket lists
     """
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+    
     val = int(id) - 1
     bucket.delete_bucket(auth.current_user.email, val)
     return redirect(request.referrer)
@@ -172,8 +167,7 @@ def delete_bucket_item(id, name):
     """
     View that  deletes bucket lists item
     """
-    if not auth.current_user.is_logged_in:
-        return redirect('/')
+
     val = int(id) - 1
     bucket.delete_bucket_item(auth.current_user.email, val, name)
     return redirect(request.referrer)
@@ -186,4 +180,4 @@ def logout():
         auth.current_user.is_logged_in = False
         del auth.current_user
         return redirect('/')
-    return redirect('/')    
+    return redirect('/')
